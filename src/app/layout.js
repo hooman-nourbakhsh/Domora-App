@@ -1,3 +1,4 @@
+import Layout from "@/layout/layout";
 import { yekan } from "@/utils/fonts";
 import "./globals.css";
 
@@ -9,7 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={yekan.className}>{children}</body>
+      <body className={yekan.className}>
+        <Layout>{children}</Layout>
+      </body>
     </html>
   );
 }

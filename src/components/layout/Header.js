@@ -1,5 +1,5 @@
 import { FiLogIn } from "react-icons/fi";
-import styles from "./Header.module.css";
+import styles from "@/layout/Header.module.css";
 import Link from "next/link";
 
 function Header() {
