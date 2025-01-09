@@ -1,4 +1,4 @@
-import Layout from "@/layout/layout";
+import Layout from "@/layout/Layout";
 import { yekan } from "@/utils/fonts";
 import "./globals.css";
 
