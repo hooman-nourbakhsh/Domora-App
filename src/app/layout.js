@@ -1,6 +1,7 @@
 import Layout from "@/layout/Layout";
 import { yekan } from "@/utils/fonts";
 import "./globals.css";
+import NextAuthProviders from "@/providers/NextAuthProviders";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body className={yekan.className}>
-        <Layout>{children}</Layout>
+        <NextAuthProviders>
+          <Layout>{children}</Layout>
+        </NextAuthProviders>
       </body>
     </html>
   );
