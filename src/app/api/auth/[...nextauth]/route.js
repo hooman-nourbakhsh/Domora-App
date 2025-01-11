@@ -9,7 +9,7 @@ const authOptions = {
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const [email, password] = credentials;
+        const { email, password } = credentials;
 
         try {
           await connectDB();
@@ -17,7 +17,7 @@ const authOptions = {
           throw new Error("مشکلی در سرور پیش آمده است");
         }
 
-        if ((!email, !password)) throw new Error("لطفا تمامی فیلد ها را پر کنید");
+        if (!email || !password) throw new Error("لطفا تمامی فیلد ها را پر کنید");
 
         const user = await User.findOne({ email });
         if (!user) throw new Error("این حساب کاربری وجود ندارد");

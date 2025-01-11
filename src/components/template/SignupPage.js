@@ -31,10 +31,8 @@ function SignupPage() {
     const data = await res.json();
     setLoading(false);
     if (res.status === 201) {
+      router.push("/signin");
       toast.success(data.message);
-      setTimeout(() => {
-        router.push("/signin");
-      }, 1000);
     } else {
       toast.error(data.error);
     }
