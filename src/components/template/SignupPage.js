@@ -1,13 +1,44 @@
 "use client";
 
-import { useState } from "react";
-import styles from "@/template/SignupPage.module.css";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast, Toaster } from "react-hot-toast";
+import styles from "@/template/SignupPage.module.css";
+import { ThreeDots } from "react-loader-spinner";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  const signupHandler = async (e) => {
+    e.preventDefault();
+
+    if (password !== rePassword) {
+      return toast.error("رمز عبور با تکرار آن مطابقت ندارد");
+    }
+    setLoading(true);
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const data = await res.json();
+    setLoading(false);
+    if (res.status === 201) {
+      toast.success(data.message);
+      setTimeout(() => {
+        router.push("/signin");
+      }, 1000);
+    } else {
+      toast.error(data.error);
+    }
+  };
 
   return (
     <div className={styles.form}>
@@ -19,11 +50,18 @@ function SignupPage() {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <label htmlFor="">تکرار رمز عبور:</label>
         <input type="password" value={rePassword} onChange={(e) => setRePassword(e.target.value)} />
-        <button type="submit">ثبت نام</button>
+        {loading ? (
+          <ThreeDots color="#304ffe" height={45} ariaLabel="three-dots-loading" visible={true} wrapperStyle={{ margin: "auto" }} />
+        ) : (
+          <button type="submit" onClick={signupHandler}>
+            ثبت نام
+          </button>
+        )}
       </form>
       <p>
         قبلا ثبت نام کرده اید؟ <Link href="/signin">ورود</Link>
       </p>
+      <Toaster />
     </div>
   );
 }
