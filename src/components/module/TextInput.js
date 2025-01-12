@@ -1,10 +1,11 @@
 import styles from "@/module/TextInput.module.css";
+import { p2e } from "@/utils/replaceNumber";
 
 function TextInput({ title, name, profileData, setProfileData, textarea = false }) {
   const changeHandler = (event) => {
     const { name, value } = event.target;
 
-    setProfileData({ ...profileData, [name]: value });
+    setProfileData({ ...profileData, [name]: p2e(value) });
   };
 
   return (
