@@ -13,7 +13,7 @@ function AddProfilePage() {
     location: "",
     phone: "",
     price: "",
-    realState: "",
+    realEState: "",
     constructionDate: new Date(),
     category: "",
     rules: [],
@@ -32,7 +32,7 @@ function AddProfilePage() {
       <TextInput title="آدرس" name="location" profileData={profileData} setProfileData={setProfileData} />
       <TextInput title="شماره تماس" name="phone" profileData={profileData} setProfileData={setProfileData} />
       <TextInput title="قیمت(تومان)" name="price" profileData={profileData} setProfileData={setProfileData} />
-      <TextInput title="بنگاه" name="realState" profileData={profileData} setProfileData={setProfileData} />
+      <TextInput title="بنگاه" name="realEState" profileData={profileData} setProfileData={setProfileData} />
       <RadioList profileData={profileData} setProfileData={setProfileData} />
       <TextList title="امکانات رفاهی" profileData={profileData} setProfileData={setProfileData} type="amenities" />
       <TextList title="قوانین" profileData={profileData} setProfileData={setProfileData} type="rules" />
