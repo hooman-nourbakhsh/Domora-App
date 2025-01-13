@@ -6,7 +6,7 @@ import RadioList from "@/module/RadioList";
 import TextList from "@/module/TextList";
 import CustomDatePicker from "@/module/CustomDatePicker";
 import toast, { Toaster } from "react-hot-toast";
-import { ThreeDots } from "react-loader-spinner";
+import Loader from "@/module/Loader";
 
 function AddProfilePage() {
   const [profileData, setProfileData] = useState({
@@ -55,7 +55,7 @@ function AddProfilePage() {
       <CustomDatePicker profileData={profileData} setProfileData={setProfileData} />
       <Toaster />
       {loading ? (
-        <ThreeDots color="#304ffe" ariaLabel="three-dots-loading" visible={true} wrapperStyle={{ margin: "auto" }} height={45} />
+        <Loader />
       ) : (
         <button className={styles.submit} onClick={submitHandler}>
           ثبت آگهی

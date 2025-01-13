@@ -15,13 +15,12 @@ export async function POST(req) {
     if (!session) {
       return NextResponse.json({ error: "لطفا وارد حساب کاربری خود شوید" }, { status: 401 });
     }
+    
     const user = await User.findOne({ email: session.user.email });
-    console.log(body);
-    console.log(session);
-
     if (!user) {
       return NextResponse.json({ error: "این حساب کاربری وجود ندارد" }, { status: 404 });
     }
+
     if (!title || !description || !location || !phone || !price || !realEState || !constructionDate || !category) {
       return NextResponse.json({ error: "لطفا تمامی فیلد ها را پر کنید" }, { status: 422 });
     }
