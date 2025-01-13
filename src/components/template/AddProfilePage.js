@@ -4,6 +4,7 @@ import styles from "@/template/AddProfilePage.module.css";
 import TextInput from "@/module/TextInput";
 import RadioList from "@/module/RadioList";
 import TextList from "@/module/TextList";
+import CustomDatePicker from "@/module/CustomDatePicker";
 
 function AddProfilePage() {
   const [profileData, setProfileData] = useState({
@@ -19,7 +20,9 @@ function AddProfilePage() {
     amenities: [],
   });
 
-  const submitHandler = () => {};
+  const submitHandler = () => {
+    console.log(profileData);
+  };
 
   return (
     <div className={styles.container}>
@@ -33,6 +36,7 @@ function AddProfilePage() {
       <RadioList profileData={profileData} setProfileData={setProfileData} />
       <TextList title="امکانات رفاهی" profileData={profileData} setProfileData={setProfileData} type="amenities" />
       <TextList title="قوانین" profileData={profileData} setProfileData={setProfileData} type="rules" />
+      <CustomDatePicker profileData={profileData} setProfileData={setProfileData} />
       <button className={styles.submit} onClick={submitHandler}>
         ثبت آگهی
       </button>
