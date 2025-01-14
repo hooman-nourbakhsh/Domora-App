@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "@/template/AddProfilePage.module.css";
 import TextInput from "@/module/TextInput";
 import RadioList from "@/module/RadioList";
@@ -8,7 +8,7 @@ import CustomDatePicker from "@/module/CustomDatePicker";
 import toast, { Toaster } from "react-hot-toast";
 import Loader from "@/module/Loader";
 
-function AddProfilePage() {
+function AddProfilePage({ data }) {
   const [profileData, setProfileData] = useState({
     title: "",
     description: "",
@@ -24,6 +24,10 @@ function AddProfilePage() {
 
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (data) setProfileData(data);
+  }, []);
+
   const submitHandler = async () => {
     setLoading(true);
     const res = await fetch("/api/profile", {
@@ -31,6 +35,7 @@ function AddProfilePage() {
       body: JSON.stringify(profileData),
       headers: { "Content-Type": "application/json" },
     });
+
     setLoading(false);
     const data = await res.json();
     if (data.error) {
@@ -40,9 +45,13 @@ function AddProfilePage() {
     }
   };
 
+  const editHandler = () => {
+    console.log("a");
+  };
+
   return (
     <div className={styles.container}>
-      <h3>ثبت آگهی</h3>
+      <h3>{data ? "ویرایش آگهی" : "ثبت آگهی"}</h3>
       <TextInput title="عنوان" name="title" profileData={profileData} setProfileData={setProfileData} />
       <TextInput title="توضیحات" name="description" profileData={profileData} setProfileData={setProfileData} textarea={true} />
       <TextInput title="آدرس" name="location" profileData={profileData} setProfileData={setProfileData} />
@@ -56,6 +65,10 @@ function AddProfilePage() {
       <Toaster />
       {loading ? (
         <Loader />
+      ) : data ? (
+        <button className={styles.submit} onClick={editHandler}>
+          ویرایش آگهی
+        </button>
       ) : (
         <button className={styles.submit} onClick={submitHandler}>
           ثبت آگهی
