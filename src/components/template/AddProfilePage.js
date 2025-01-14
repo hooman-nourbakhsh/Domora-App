@@ -7,6 +7,7 @@ import TextList from "@/module/TextList";
 import CustomDatePicker from "@/module/CustomDatePicker";
 import toast, { Toaster } from "react-hot-toast";
 import Loader from "@/module/Loader";
+import { useRouter } from "next/navigation";
 
 function AddProfilePage({ data }) {
   const [profileData, setProfileData] = useState({
@@ -28,6 +29,7 @@ function AddProfilePage({ data }) {
     if (data) setProfileData(data);
   }, []);
 
+  const router = useRouter();
   const submitHandler = async () => {
     setLoading(true);
     const res = await fetch("/api/profile", {
@@ -42,11 +44,25 @@ function AddProfilePage({ data }) {
       toast.error(data.error);
     } else {
       toast.success(data.message);
+      router.refresh();
     }
   };
 
-  const editHandler = () => {
-    console.log("a");
+  const editHandler = async () => {
+    setLoading(true);
+    const res = await fetch("/api/profile", {
+      method: "PATCH",
+      body: JSON.stringify(profileData),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (data.error) {
+      toast.error(data.error);
+    } else {
+      toast.success(data.message);
+      router.refresh();
+    }
   };
 
   return (
