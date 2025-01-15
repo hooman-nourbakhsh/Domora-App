@@ -1,5 +1,6 @@
 import CategoryCard from "@/module/CategoryCard";
 import { FiCircle } from "react-icons/fi";
+import { FaCity } from "react-icons/fa";
 import styles from "@/template/HomePage.module.css";
 
 function HomePage() {
@@ -26,6 +27,17 @@ function HomePage() {
         <CategoryCard title="آپارتمان" name="apartment" />
         <CategoryCard title="مغازه" name="store" />
         <CategoryCard title="دفتر" name="office" />
+      </div>
+      <div className={styles.city}>
+        <h3>شهر های پر بازدید</h3>
+        <ul>
+          {cities.map((item) => (
+            <li key={item}>
+              <FaCity />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
