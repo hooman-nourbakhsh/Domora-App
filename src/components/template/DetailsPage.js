@@ -1,16 +1,19 @@
-import { BiStore } from "react-icons/bi";
+import { BiCalendarCheck, BiStore } from "react-icons/bi";
 import { RiHome3Line } from "react-icons/ri";
 import { MdApartment } from "react-icons/md";
 import { GiOfficeChair } from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { SiHomebridge } from "react-icons/si";
+import { AiOutlinePhone } from "react-icons/ai";
 import ItemList from "@/module/ItemList";
 import Title from "@/module/Title";
+import { e2p, sp } from "@/utils/replaceNumber";
 import styles from "@/template/DetailsPage.module.css";
 
-function DetailsPage({ data }) {
+function DetailsPage({ data: { title, location, description, amenities, rules, realEState, phone, price, category, constructionDate } }) {
   const categories = {
     villa: "ویلا",
-    apartment: "اپارتمان",
+    apartment: "آپارتمان",
     store: "مغازه",
     office: "دفتر",
   };
@@ -24,19 +27,38 @@ function DetailsPage({ data }) {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <h1>{data.title}</h1>
+        <h1>{title}</h1>
         <span>
           <HiOutlineLocationMarker />
-          {data.location}
+          {location}
         </span>
         <Title>توضیحات</Title>
-        <p>{data.description}</p>
+        <p>{description}</p>
         <Title>امکانات رفاهی</Title>
-        <ItemList data={data.amenities} />
+        <ItemList data={amenities} />
         <Title>قوانین</Title>
-        <ItemList data={data.rules} />
+        <ItemList data={rules} />
       </div>
-      <div className={styles.sidebar}></div>
+      <div className={styles.sidebar}>
+        <div className={styles.realEState}>
+          <SiHomebridge />
+          <p>املاک : {realEState}</p>
+          <span>
+            <AiOutlinePhone /> {e2p(phone)}
+          </span>
+        </div>
+        <div className={styles.price}>
+          <p>
+            {icons[category]}
+            {categories[category]}
+          </p>
+          <p>{sp(price)} تومان</p>
+          <p>
+            <BiCalendarCheck />
+            {new Date(constructionDate).toLocaleDateString("fa-IR")}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
