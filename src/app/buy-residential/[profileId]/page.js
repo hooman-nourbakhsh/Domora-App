@@ -7,7 +7,7 @@ async function ProfileDetails({ params: { profileId } }) {
   const profile = await Profile.findOne({ _id: profileId });
 
   if (!profile) return <h3>مشکلی پیش آمده است</h3>;
-  return <DetailsPage data={profileId} />;
+  return <DetailsPage data={profile} />;
 }
 
 export default ProfileDetails;
