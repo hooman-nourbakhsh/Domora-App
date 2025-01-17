@@ -8,7 +8,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import styles from "@/module/Card.module.css";
 
-function Card({ data: { category, title, location, price } }) {
+function Card({ data: { _id, category, title, location, price } }) {
   const icons = {
     villa: <RiHome3Line />,
     apartment: <MdApartment />,
@@ -25,7 +25,7 @@ function Card({ data: { category, title, location, price } }) {
         {location}
       </p>
       <span>{sp(price)} تومان</span>
-      <Link href="/">
+      <Link href={`/buy-residential/${_id}`}>
         مشاهده آگهی <BiLeftArrowAlt />
       </Link>
     </div>
