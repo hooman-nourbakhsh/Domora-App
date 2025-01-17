@@ -9,6 +9,7 @@ import ItemList from "@/module/ItemList";
 import Title from "@/module/Title";
 import { e2p, sp } from "@/utils/replaceNumber";
 import styles from "@/template/DetailsPage.module.css";
+import ShareButton from "@/module/ShareButton";
 
 function DetailsPage({ data: { title, location, description, amenities, rules, realEState, phone, price, category, constructionDate } }) {
   const categories = {
@@ -47,6 +48,7 @@ function DetailsPage({ data: { title, location, description, amenities, rules, r
             <AiOutlinePhone /> {e2p(phone)}
           </span>
         </div>
+        <ShareButton />
         <div className={styles.price}>
           <p>
             {icons[category]}
