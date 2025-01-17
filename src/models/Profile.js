@@ -48,6 +48,10 @@ const profileSchema = new Schema(
       ref: "User",
       required: true,
     },
+    published: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
