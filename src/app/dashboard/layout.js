@@ -5,6 +5,10 @@ import DashboardSidebar from "@/layout/DashboardSidebar";
 import connectDB from "@/utils/connectDB";
 import User from "@/models/User";
 
+export const metadata = {
+  title: "پنل کاربری || DomorA",
+};
+
 async function DashboardLayout({ children }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/signin");
