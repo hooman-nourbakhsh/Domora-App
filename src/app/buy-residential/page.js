@@ -1,7 +1,9 @@
+export const dynamic = 'force-dynamic';
 import BuyResidentialsPage from "@/template/BuyResidentialsPage";
 
 async function BuyResidentials({ searchParams }) {
-  const res = await fetch("http://localhost:3000/api/profile", { cache: "no-store" });
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/profile`, { cache: "no-store" });
   const data = await res.json();
 
   if (data.error) return <h3>مشکلی پیش آمده است</h3>;
